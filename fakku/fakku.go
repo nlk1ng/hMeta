@@ -83,6 +83,8 @@ func Fakku(config FakkuScraperConfig, urls ...string) (Metadata, error) {
 				gal.Publisher = append(gal.Publisher, parseTags(s)...)
 			case "Book":
 				gal.Book = append(gal.Book, parseTags(s)...)
+			case "Event":
+				gal.Event = append(gal.Event, parseTags(s)...)
 			case "Pages":
 				p, err := strconv.Atoi(strings.TrimSuffix(s.Find("div:nth-child(2)").Text(), " pages"))
 				if err == nil {

@@ -8,6 +8,7 @@ type Metadata struct {
 	Magazine     []string
 	Publisher    []string
 	Book         []string
+	Event        []string
 	Favorites    int
 	Pages        int
 	ThumbnailUrl string

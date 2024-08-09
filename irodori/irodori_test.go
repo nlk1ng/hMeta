@@ -8,8 +8,11 @@ func TestIrodori(t *testing.T) {
 		url  string
 	}{
 		{
-			desc: "",
+			desc: "1",
 			url:  "https://irodoricomics.com/Screwed-by-Step-Dad-All-About-Yui-2",
+		}, {
+			"2",
+			"https://irodoricomics.com/Top-Class-MILF",
 		},
 	}
 	for _, tC := range testCases {
@@ -18,7 +21,7 @@ func TestIrodori(t *testing.T) {
 			if err != nil {
 				t.Error(err.Error())
 			}
-			t.Logf("%+v", d)
+			t.Logf("%+v\n", d)
 		})
 	}
 }
