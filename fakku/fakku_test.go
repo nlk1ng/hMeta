@@ -5,6 +5,7 @@ import (
 	"testing"
 
 	_ "github.com/joho/godotenv/autoload"
+	hmeta "github.com/nlk1ng/hMeta"
 )
 
 func TestFakkuScraper(t *testing.T) {
@@ -35,14 +36,18 @@ func TestFakkuScraper(t *testing.T) {
 			desc: "Multiple artist",
 			url:  "https://www.fakku.net/hentai/black-tights-english",
 		},
+		{
+			"Hidden Content",
+			"https://www.fakku.net/hentai/chimera_part_1_english",
+		},
 	}
 	for _, tC := range testCases {
 		t.Run(tC.desc, func(t *testing.T) {
-			gal, err := Fakku(FakkuScraperConfig{
-				UserAgent:   ua,
-				CfClearance: fakkucf,
-				FakkuSid:    fakkusid,
-			}, tC.url)
+			gal, err := ByURL(tC.url,
+				SetFakkuSid(fakkusid),
+				SetCfClearance(fakkucf),
+				hmeta.SetUserAgent(ua),
+			)
 
 			if err != nil {
 				t.Error(err.Error())

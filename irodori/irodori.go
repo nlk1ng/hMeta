@@ -8,6 +8,7 @@ import (
 	"strings"
 
 	"github.com/gocolly/colly/v2"
+	hmeta "github.com/nlk1ng/hMeta"
 )
 
 const irodoriTitleSelector = `#product > div.title.page-title`
@@ -22,11 +23,14 @@ type irodoriThumbJson struct {
 	SubHtml string `json:"subHtml"`
 }
 
-func Irodori(url string) (Metadata, error) {
+// ByURL will scrape an irodori gallery and return the metadata from it. a valid User Agent must be set throuh opts.
+func ByURL(url string, opts ...hmeta.ScraperOption) (Metadata, error) {
 	var gal Metadata
-	collector := colly.NewCollector(
-		colly.UserAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36"),
-	)
+	collector := hmeta.Scraper{Collector: colly.NewCollector()}
+
+	for _, f := range opts {
+		f(&collector)
+	}
 
 	// Title
 	collector.OnHTML(irodoriTitleSelector, func(h *colly.HTMLElement) {
