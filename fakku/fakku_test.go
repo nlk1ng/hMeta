@@ -40,6 +40,10 @@ func TestFakkuScraper(t *testing.T) {
 			"Hidden Content",
 			"https://www.fakku.net/hentai/chimera_part_1_english",
 		},
+		{
+			"Abnormal Description with links",
+			"https://www.fakku.net/hentai/pooters-all-you-can-sex-english",
+		},
 	}
 	for _, tC := range testCases {
 		t.Run(tC.desc, func(t *testing.T) {

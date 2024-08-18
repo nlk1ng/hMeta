@@ -21,3 +21,9 @@ func SetUserAgent(ua string) ScraperOption {
 		s.UserAgent = ua
 	}
 }
+
+func IgnoreRobotsTxt() ScraperOption {
+	return func(s *Scraper) {
+		s.IgnoreRobotsTxt = true
+	}
+}

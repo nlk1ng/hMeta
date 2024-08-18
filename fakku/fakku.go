@@ -10,7 +10,6 @@ import (
 	hmeta "github.com/nlk1ng/hMeta"
 )
 
-
 const fakkuMainContentSelector = `body > div.block.max-w-screen-xl.relative.mx-auto.flex.flex-col.h-screen > div.grid.grid-flow-row-dense.grid-cols-2.sm\:grid-cols-4.md\:grid-cols-6.lg\:grid-cols-10.gap-6.md\:gap-8.relative.text-center.w-full.px-6.pt-20.mx-auto.xl\:px-0 > div:nth-child(2) > div > div.block.md\:table-cell.relative.w-full.align-top.p-8.pt-0.md\:pt-8.md\:pl-2.space-y-4`
 const fakkuThumbSelector = `body > div.block.max-w-screen-xl.relative.mx-auto.flex.flex-col.h-screen > div.grid.grid-flow-row-dense.grid-cols-2.sm\:grid-cols-4.md\:grid-cols-6.lg\:grid-cols-10.gap-6.md\:gap-8.relative.text-center.w-full.px-6.pt-20.mx-auto.xl\:px-0 > div:nth-child(2) > div > div.block.sm\:inline-block.relative.w-full.align-top.p-2.md\:p-8.text-center.space-y-4 > div > a > img`
 const fakkuDescriptionSelector = `head > meta:nth-child(17)`
@@ -78,11 +77,15 @@ func ByURL(url string, opts ...hmeta.ScraperOption) (Metadata, error) {
 					gal.Favorites = p
 				}
 			default:
-				if s.Find("div:nth-child(1) > a").Text() != "" {
-					s.Find("div:nth-child(1) > a").Each(func(i int, s *goquery.Selection) {
-						gal.Tag = append(gal.Tag, strings.TrimSpace(s.Text()))
-					})
-				}
+
+			}
+		})
+
+		h.DOM.Children().Filter(`div.table`).Last().Children().Each(func(i int, s *goquery.Selection) {
+			if s.Find("div:nth-child(1) > a").Text() != "" {
+				s.Find("div:nth-child(1) > a").Each(func(i int, s *goquery.Selection) {
+					gal.Tag = append(gal.Tag, strings.TrimSpace(s.Text()))
+				})
 			}
 		})
 	})
