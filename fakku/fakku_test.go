@@ -44,6 +44,10 @@ func TestFakkuScraper(t *testing.T) {
 			"Abnormal Description with links",
 			"https://www.fakku.net/hentai/pooters-all-you-can-sex-english",
 		},
+		{
+			"When there's announcement- element",
+			"https://www.fakku.net/hentai/the-virgin-girl-who-wet-herself-chapter-4-english",
+		},
 	}
 	for _, tC := range testCases {
 		t.Run(tC.desc, func(t *testing.T) {
